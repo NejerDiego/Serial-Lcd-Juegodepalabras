@@ -1,0 +1,54 @@
+//////////////////// UNIVERSIDAD TECNICA DEL NORTE /////////////////////////////
+///////////// FACULTA DE INGENIERIA EN CIENCIAS APLICADAS /////////////////////
+
+///NOMBRE: NEJER HARO DIEGO FERNANDO /////////
+/// CARRERA: CIERCOM //////////////////
+/// FECHA: 15 DE ENERO DEL 2017 //////////////
+
+
+#include <LiquidCrystal.h>
+LiquidCrystal lcd (9, 8, 7, 6, 5, 4);
+String dato;
+int tamano;
+int i = 0;
+int j = 1;
+void setup() {
+  // put your setup code here, to run once:
+  lcd.begin(16, 2);
+  Serial.begin(9600);
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  Serial.println("Introduzca la Palabra");
+  delay(3000);
+  dato = Serial.readString();
+  tamano = dato.length();
+  char vector[tamano + 1];
+  dato.toCharArray(vector, tamano + 1);
+
+  for (; i < tamano; i++) {
+    j = 1 - j;
+    lcd.setCursor(i, j);
+    lcd.print(vector[i]);
+    delay(200);
+  }
+  j = 1;
+  for (; i >= 0; i--) {
+    j = 1 - j;
+    lcd.setCursor(i, j);
+    lcd.print(' ');
+    delay(100);
+  }
+  i=16;
+  j = 1;
+  for (; i >= 0; i--) {
+    j = 1 - j;
+    lcd.setCursor(i, j);
+    lcd.print(' ');
+    delay(100);
+
+  }
+  Serial.println(' ');
+}
